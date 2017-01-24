@@ -6,13 +6,13 @@ var expressLayouts = require('express-ejs-layouts');
 var morgan =require('morgan');
 var port = process.env.PORT || 8080;
 
-//set view engine
+//congfigs
 app.use(morgan('dev'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.use(express.static(__dirname + '/public'));
 
-//set router
+//set routes
 var router = require('./app/routes');
 app.use('/',router);
 

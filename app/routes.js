@@ -9,3 +9,4 @@ var siteController = require('./controllers/site.controller');
 
 //set routes via stubs/prototypes
 router.get('/', siteController.homePage);
+router.get('/events', siteController.events);

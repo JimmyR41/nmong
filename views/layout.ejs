@@ -2,10 +2,39 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>CrudApp</title>
+    <title>Olympics App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
   </head>
+
+
   <body>
-    <%- body %>
+    <!-- header -->
+      <header id="site-header">
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Olympic Events</a>
+            <ul class="nav navbar-nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    <!--main  -->
+    <main id="site-main">
+      <div class="container">
+        <%- body %>
+      </div>
+    </main>
+
+    <!--footer  -->
+    <footer id="site-footer">
+      <div class="container">
+        Copyright &copy; 2016 Olympics
+      </div>
+    </footer>
 
   </body>
 </html>
