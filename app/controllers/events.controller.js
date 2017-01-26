@@ -1,5 +1,6 @@
 module.exports = {
   showEvents: showEvents,
+  singleEvent: singleEvent,
 };
 
 //show all events
@@ -12,4 +13,9 @@ function showEvents(req,res){
   ];
   //return a view with data
   res.render('pages/events',{ events: events});
+};
+
+function singleEvent(req, res){
+  var single = {name: 'Basketball', slug: 'basketball', description: 'Throwing into basket'};
+  res.render('pages/single', {single: single});
 };

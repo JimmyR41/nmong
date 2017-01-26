@@ -8,6 +8,8 @@ module.exports = router;
 var siteController = require('./controllers/site.controller');
 var eventsController = require('./controllers/events.controller');
 
+
 //set routes via stubs/prototypes
 router.get('/', siteController.homePage);
 router.get('/events', eventsController.showEvents);
+router.get('/events/:slug', eventsController.singleEvent)
