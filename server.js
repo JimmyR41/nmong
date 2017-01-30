@@ -1,4 +1,5 @@
 //requirements
+var dotenv = require('dotenv').config();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -14,7 +15,7 @@ app.use(expressLayouts);
 app.use(express.static(__dirname + '/public'));
 
 //connect to db
-mongoose.connect('mongodb://scotch:scotch@ds135519.mlab.com:35519/olympic-events');
+mongoose.connect(process.env.DB_URI);
 //set routes
 var router = require('./app/routes');
 app.use('/',router);
