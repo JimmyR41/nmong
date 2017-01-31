@@ -1,3 +1,4 @@
+var Event = require('../models/event')
 module.exports = {
   showEvents: showEvents,
   singleEvent: singleEvent,
