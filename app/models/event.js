@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-  Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
   //create Schema
   var eventSchema = new Schema({
@@ -13,7 +13,7 @@ var mongoose = require('mongoose');
 
 //middelware
 //make sure slug is created from the name
-eventShcema.pre('save',function(next){
+eventSchema.pre('save', function(next){
   this.slug = slugify(this.name);
   next();
 });

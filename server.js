@@ -5,7 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
 var mongoose = require('mongoose');
-var morgan =require('morgan');
+var morgan = require('morgan');
 var port = process.env.PORT || 8080;
 
 //congfigs
