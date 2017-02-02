@@ -13,4 +13,8 @@ var eventsController = require('./controllers/events.controller');
 router.get('/', siteController.homePage);
 router.get('/events', eventsController.showEvents);
 router.get('/events/seed', eventsController.seedEvents);
+
+router.get('/events/create', eventsController.showCreate);
+router.post('/events/create', eventsController.processCreate);
+//make sure this is last for events ... 
 router.get('/events/:slug', eventsController.singleEvent);

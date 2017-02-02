@@ -13,6 +13,7 @@ app.use(morgan('dev'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //connect to db
 mongoose.connect(process.env.DB_URI);

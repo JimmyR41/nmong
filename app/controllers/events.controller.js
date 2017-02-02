@@ -1,8 +1,11 @@
 var Event = require('../models/event');
+
 module.exports = {
   showEvents: showEvents,
   singleEvent: singleEvent,
   seedEvents: seedEvents,
+  showCreate: showCreate,
+  processCreate: processCreate,
 };
 
 //show all events
@@ -25,7 +28,7 @@ function singleEvent(req, res){
       res.status(404);
       res.send('Event not found!');
     };
-    res.render('pages/single', {event: event});
+    res.render('pages/single', { event: event });
   });
 };
 
@@ -45,4 +48,22 @@ function seedEvents(req, res){
   });
 
   res.send('database seeded!');
+};
+
+function showCreate(req,res){
+  res.render('pages/create');
+};
+
+function processCreate(req,res){
+  const event = new Event({
+    name: req.body.name,
+    description: req.body.description
+  });
+
+  event.save((err) => {
+    if (err)
+      throw err;
+      //redirect to the new page
+    res.redirect(`/events/${event.slug}`);
+  });
 };
