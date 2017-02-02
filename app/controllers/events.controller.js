@@ -8,19 +8,28 @@ module.exports = {
 //show all events
 function showEvents(req,res){
   //get all events
-
-
-  //return a view with data
-  res.render('pages/events',{ events: events});
+  Event.find({}, (err, events) => {
+    if (err){
+      res.status(404);
+      res.send('Events not found!');
+    }
+    //return a view with data
+    res.render('pages/events',{ events: events});
+  });
 };
 
 //show single event
 function singleEvent(req, res){
-  var single = {name: 'Basketball', slug: 'basketball', description: 'Throwing into basket'};
-  res.render('pages/single', {single: single});
+  Event.findOne({ slug: req.params.slug }, (err, event) => {
+    if (err){
+      res.status(404);
+      res.send('Event not found!');
+    };
+    res.render('pages/single', {event: event});
+  });
 };
 
-//seed events 
+//seed events
 function seedEvents(req, res){
   var events = [
     {name: 'Basketball', description: 'Throwing into basket'},
