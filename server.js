@@ -9,6 +9,7 @@ var morgan = require('morgan');
 var flash = require('connect-flash');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var expressValidator= require('express-validator');
 var port = process.env.PORT || 8080;
 
 //congfigs
@@ -25,6 +26,7 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 
 //connect to db
 mongoose.connect(process.env.DB_URI);

@@ -54,10 +54,22 @@ function seedEvents(req, res){
 };
 
 function showCreate(req,res){
-  res.render('pages/create');
+  res.render('pages/create',{
+    errors: req.flash('errors'),
+  });
+
 };
 
 function processCreate(req,res){
+  req.checkBody('name', 'Must enter a name').notEmpty();
+  req.checkBody('description', 'Must enter a description').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if (errors){
+    req.flash('errors',errors.map(err => err.msg));
+    return res.redirect('/events/create');
+  };
   const event = new Event({
     name: req.body.name,
     description: req.body.description

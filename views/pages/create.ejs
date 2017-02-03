@@ -3,7 +3,14 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
+    <div class="col-sm-6 col-sm-offset-3">
+      <% if (errors.length > 0){ %>
+          <div class="alert alert-danger">
+            <% for (error of errors) { %>
+            <%= error %><br>
+            <% }; %>
+          </div>
+      <% }; %>
     <form class="form" action="/events/create" method="post">
       <div class="form-group">
         <label for="name">Name</label>
