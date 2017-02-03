@@ -6,9 +6,20 @@ var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
+var flash = require('connect-flash');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var port = process.env.PORT || 8080;
 
 //congfigs
+app.use(cookieParser());
+app.use(session({
+  secret: process.env.SECRET,
+  cookie: {maxAge: 6000},
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(flash());
 app.use(morgan('dev'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);

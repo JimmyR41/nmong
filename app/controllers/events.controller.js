@@ -28,7 +28,10 @@ function singleEvent(req, res){
       res.status(404);
       res.send('Event not found!');
     };
-    res.render('pages/single', { event: event });
+    res.render('pages/single', {
+      event: event,
+      success: req.flash('success')
+     });
   });
 };
 
@@ -64,6 +67,7 @@ function processCreate(req,res){
     if (err)
       throw err;
       //redirect to the new page
+    req.flash('success', "Successfully Created Event");
     res.redirect(`/events/${event.slug}`);
   });
 };
