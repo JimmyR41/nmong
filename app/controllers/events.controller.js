@@ -6,6 +6,8 @@ module.exports = {
   seedEvents: seedEvents,
   showCreate: showCreate,
   processCreate: processCreate,
+  showEdit: showEdit,
+  processEdit: processEdit,
 };
 
 //show all events
@@ -82,4 +84,36 @@ function processCreate(req,res){
     req.flash('success', "Successfully Created Event");
     res.redirect(`/events/${event.slug}`);
   });
+};
+
+function showEdit(req,res){
+  res.render('pages/edit');
+
+};
+
+function processEdit(req,res){
+  req.checkBody('name', 'Must enter a name').notEmpty();
+  req.checkBody('description', 'Must enter a description').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if (errors){
+    req.flash('errors',errors.map(err => err.msg));
+    return res.redirect(`/events/${req.params.slug}/edit`);
+  };
+  //find current event
+  event.findOne({ slug: req.params.slug}, (err,event) =>{
+    event.description = req.body.description;
+
+    event.save((err)=>{
+      if (err)
+      throw err;
+
+      req.flash('success', 'Successfully updated event.');
+      res.redirect('/events');
+    })
+  });
+  //update that event
+  //redirect user to /events
+
 };
