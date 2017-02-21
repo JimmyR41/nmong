@@ -18,8 +18,11 @@ function showEvents(req,res){
       res.status(404);
       res.send('Events not found!');
     }
-    //return a view with data
-    res.render('pages/events',{ events: events});
+    //return a view with data now I can use event obj in the view
+    res.render('pages/events',{
+      events: events,
+      success: req.flash('success'),
+    });
   });
 };
 
@@ -86,11 +89,17 @@ function processCreate(req,res){
   });
 };
 
+//view for event editing
 function showEdit(req,res){
-  res.render('pages/edit');
-
+  Event.findOne({ slug: req.params.slug }, (err, event) => {
+    res.render('pages/edit', {
+    event: event,
+    errors: req.flash('errors'),
+    });
+  });
 };
 
+// action on event editing form
 function processEdit(req,res){
   req.checkBody('name', 'Must enter a name').notEmpty();
   req.checkBody('description', 'Must enter a description').notEmpty();
@@ -101,19 +110,22 @@ function processEdit(req,res){
     req.flash('errors',errors.map(err => err.msg));
     return res.redirect(`/events/${req.params.slug}/edit`);
   };
+
   //find current event
-  event.findOne({ slug: req.params.slug}, (err,event) =>{
+  Event.findOne({ slug: req.params.slug}, (err,event) =>{
+    //update that event
+    event.name = req.body.name;
     event.description = req.body.description;
 
     event.save((err)=>{
       if (err)
-      throw err;
+        throw err;
 
-      req.flash('success', 'Successfully updated event.');
+      req.flash('success', "Successfully updated event.");
       res.redirect('/events');
-    })
+    });
   });
-  //update that event
+
   //redirect user to /events
 
 };

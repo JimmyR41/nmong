@@ -30,6 +30,7 @@ app.use(expressValidator());
 
 //connect to db
 mongoose.connect(process.env.DB_URI);
+
 //set routes
 var router = require('./app/routes');
 app.use('/',router);

@@ -2,6 +2,12 @@
   <h1>All Events</h1>
 </div>
 
+<% if (success.length > 0){ %>
+  <div class="alert alert-success">
+    <%= success %>
+  </div>
+  <% }; %>
+
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
@@ -15,7 +21,8 @@
         <tr>
           <td><%= event.name %></td>
           <td><%= event.description %></td>
-          <td><a href="/events/<%= event.slug %>" class="btn btn-sm btn-primary">See Events</a></td>
+          <td><a href="/events/<%= event.slug %>" class="btn btn-sm btn-primary">See Event</a></td>
+          <td><a href="/events/<%= event.slug %>/edit" class="btn btn-sm btn-primary">Edit</a></td>
         </tr>
     <% } %>
   </tbody>
